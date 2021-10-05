@@ -36,7 +36,7 @@ export class AuthController {
         });
         // Отправляем токен.
         res.status(200).json({
-          token: `Token ${token}`
+          token: `Bearer ${token}`
         });
       }
     }
