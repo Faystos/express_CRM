@@ -20,7 +20,7 @@ export class PositionController {
 
   createPosition = async (req: RequestInterface, res: Response): Promise<void> => {
     try {
-      const newPosition: PositionInterface = await new PositionModel({
+      await new PositionModel({
         name: req.body.name,
         cost: req.body. cost,
         category: req.body.category,
@@ -33,7 +33,7 @@ export class PositionController {
 
   patchPosition = async (req: Request, res: Response): Promise<void> => {
     try {
-      const updatePosition = await  PositionModel.findOneAndUpdate(
+      const updatePosition: PositionInterface = await  PositionModel.findOneAndUpdate(
         {
           _id: req.params.id
         },
