@@ -22,9 +22,8 @@ connect(`${mongoEnvironment.mongoURI}`)
   .then(() => console.log('mongo connection'))
   .catch((err: Error) => console.log('mongo connection error:', err));
 
-
-// PassportFunction(use);
 app.use(morgan('dev'));
+app.use('/img', express.static(__dirname + '/uploads'));
 app.use(urlencoded({
   extended: true
 }));
