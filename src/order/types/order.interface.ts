@@ -2,7 +2,7 @@ import { Schema, SchemaDefinitionProperty} from 'mongoose';
 
 export interface OrderInterface {
   date: SchemaDefinitionProperty<Date>
-  order: Schema.Types.ObjectId;
+  order: number;
   user: Schema.Types.ObjectId;
   list: ListOrderInterface[];
 }

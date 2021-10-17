@@ -3,7 +3,7 @@ import { OrderInterface } from '../types/order.interface';
 
 const orderSchema = new Schema<OrderInterface>({
   date: { type: Date, default: Date.now },
-  order: { ref: 'orders', type: Schema.Types.ObjectId },
+  order: { ref: 'orders', type: Number },
   user: { ref: 'users', type: Schema.Types.ObjectId },
   list: [{
     name: { type: String },
