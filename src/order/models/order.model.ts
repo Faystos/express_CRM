@@ -10,6 +10,5 @@ const orderSchema = new Schema<OrderInterface>({
     quantity: { type: Number },
     cost: { type: Number }
   }]
-
 });
 export const OrderModel = model<OrderInterface>('orders', orderSchema);

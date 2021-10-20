@@ -1,14 +1,46 @@
-import {Request, Response} from 'express';
+import { Response } from 'express';
 
 import { OrderModel } from '../models/order.model';
 import { errorHandler } from '../../utils/errorHandler';
-import { OrderInterface } from '../types/order.interface';
 import { RequestInterface } from '../../types/request.interface';
+import { QueryInterface } from '../types/query.interface';
 
 export class OrderController {
   getOrder = async (req: RequestInterface, res: Response): Promise<void> => {
-    try {
+    const query: QueryInterface = {
+      user: req.user._id
+    };
 
+    // Запрос по дате старта
+    if (req.query.start) {
+      query.date = {
+        // значение >=
+        $gte: req.query.start
+      };
+    }
+
+    // Запрос по дате конца
+    if (req.query.end) {
+      if (!query.date) {
+        query.date = {}
+      }
+      query.date['$lte'] = req.query.end;
+    }
+
+    // Запрос по order
+    if (req.query.order) {
+      query.order = +req.query.order
+    }
+
+    try {
+      const allOrders = await OrderModel.find(() => query)
+        .sort({ date: -1 })
+        .skip(+req.query.offset)
+        .limit(+req.query.limit);
+
+      res.status(200).json({
+        allOrders
+      });
     } catch (err) {
       errorHandler(res, err)
     }
