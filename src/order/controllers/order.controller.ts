@@ -6,7 +6,7 @@ import { RequestInterface } from '../../types/request.interface';
 import { QueryInterface } from '../types/query.interface';
 
 export class OrderController {
-  getOrder = async (req: RequestInterface, res: Response): Promise<void> => {
+  getOrders = async (req: RequestInterface, res: Response): Promise<void> => {
     const query: QueryInterface = {
       user: req.user._id
     };
